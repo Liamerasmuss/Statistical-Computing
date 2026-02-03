@@ -1,0 +1,66 @@
+---
+title: "Practical One - Statistical Computing"
+author: "Liam Erasmus"
+date: "2026-02-03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(tidyr)
+```
+
+### Question 1
+```{r}
+data <- airquality
+clean_data <- data %>% drop_na()
+```
+
+### Question 2
+```{r}
+# Temperature
+meanTemp <- mean(clean_data$Temp)
+meanTemp
+sdTemp<- sd(clean_data$Temp)
+sdTemp
+minTemp <- min(clean_data$Temp)
+minTemp
+maxTemp <- max(clean_data$Temp)
+maxTemp
+
+
+# Ozone
+meanOzone <- mean(clean_data$Ozone)
+meanOzone
+sdOzone <- sd(clean_data$Ozone)
+sdOzone
+minOzone <- min(clean_data$Ozone)
+minOzone
+maxOzone <- max(clean_data$Ozone)
+maxOzone
+
+```
+
+### Question 3
+```{r}
+data2<- cars
+Y <- data2$dist
+X <- cbind(1, data2$speed)
+beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y # beta estimate
+rownames(beta_hat) <- c("Intercept", "Speed")
+beta_hat
+```
+
+### Question 4
+```{r}
+lm(Y~X) #check against lm function
+
+```
+
+
+
