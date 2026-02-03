@@ -18,13 +18,14 @@ library(tidyr)
 ### Question 1
 ```{r}
 data <- airquality
-clean_data <- data %>% drop_na()
+clean_data <- data %>% drop_na() # remove na rows
 ```
 
 ### Question 2
 ```{r}
 # Temperature
-meanTemp <- mean(clean_data$Temp)
+# find mean, sd, min and Max of the temperature column
+meanTemp <- mean(clean_data$Temp) 
 meanTemp
 sdTemp<- sd(clean_data$Temp)
 sdTemp
@@ -35,6 +36,7 @@ maxTemp
 
 
 # Ozone
+# find mean, sd, min and Max of the ozone column
 meanOzone <- mean(clean_data$Ozone)
 meanOzone
 sdOzone <- sd(clean_data$Ozone)
@@ -48,7 +50,7 @@ maxOzone
 
 ### Question 3
 ```{r}
-data2<- cars
+data2<- cars #load cars data set
 Y <- data2$dist
 X <- cbind(1, data2$speed)
 beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y # beta estimate
