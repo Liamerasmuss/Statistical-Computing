@@ -363,7 +363,12 @@ display: none;
 <div id="question-1" class="section level3">
 <h3>Question 1</h3>
 <pre class="r"><code>data &lt;- airquality
-clean_data &lt;- data %&gt;% drop_na() # remove na rows</code></pre>
+sum(is.na(data)) # count how many na rows</code></pre>
+<pre><code>## [1] 44</code></pre>
+<pre class="r"><code>colSums(is.na(data)) # find out which cols have na</code></pre>
+<pre><code>##   Ozone Solar.R    Wind    Temp   Month     Day 
+##      37       7       0       0       0       0</code></pre>
+<pre class="r"><code>clean_data &lt;- data %&gt;% drop_na() # remove na rows</code></pre>
 </div>
 <div id="question-2" class="section level3">
 <h3>Question 2</h3>
@@ -419,8 +424,10 @@ maxOzone</code></pre>
 </div>
 <div id="question-3" class="section level3">
 <h3>Question 3</h3>
-<pre class="r"><code>data2&lt;- cars #load cars data set
-Y &lt;- data2$dist
+<pre class="r"><code>data2&lt;- cars # load cars data set
+sum(is.na(data2)) # no na rows</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>Y &lt;- data2$dist
 X &lt;- cbind(1, data2$speed)
 beta_hat &lt;- solve(t(X) %*% X) %*% t(X) %*% Y # beta estimate
 rownames(beta_hat) &lt;- c(&quot;Intercept&quot;, &quot;Speed&quot;)
