@@ -34,6 +34,16 @@ minTemp
 maxTemp <- max(clean_data$Temp)
 maxTemp
 
+# now just removing na from calc
+meanTemp2 <- mean(data$Temp, na.rm=TRUE) 
+meanTemp2
+sdTemp2<- sd(data$Temp, na.rm=TRUE)
+sdTemp2
+minTemp2 <- min(data$Temp, na.rm=TRUE)
+minTemp2
+maxTemp2 <- max(data$Temp, na.rm=TRUE)
+maxTemp2
+
 
 # Ozone
 # find mean, sd, min and Max of the ozone column
@@ -46,6 +56,7 @@ minOzone
 maxOzone <- max(clean_data$Ozone)
 maxOzone
 
+# all na values are in ozone, so redoing it with na.rm will make no difference
 ```
 
 ### Question 3
