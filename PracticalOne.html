@@ -367,8 +367,9 @@ clean_data &lt;- data %&gt;% drop_na() # remove na rows</code></pre>
 </div>
 <div id="question-2" class="section level3">
 <h3>Question 2</h3>
-<pre class="r"><code># Temperature
-# find mean, sd, min and Max of the temperature column
+<div id="temperature" class="section level4">
+<h4>Temperature</h4>
+<pre class="r"><code># find mean, sd, min and Max of the temperature column
 meanTemp &lt;- mean(clean_data$Temp) 
 meanTemp</code></pre>
 <pre><code>## [1] 77.79279</code></pre>
@@ -381,7 +382,9 @@ minTemp</code></pre>
 <pre class="r"><code>maxTemp &lt;- max(clean_data$Temp)
 maxTemp</code></pre>
 <pre><code>## [1] 97</code></pre>
-<pre class="r"><code># now just removing na from calc
+<div id="question-2-temp-calcs-using-na.rm-true" class="section level5">
+<h5>Question 2 Temp Calcs using Na.rm = True</h5>
+<pre class="r"><code># removing all of the na rows lead to losing Temp values, redoing it to make it more accurate. Keeping the old code for learning purposes.
 meanTemp2 &lt;- mean(data$Temp, na.rm=TRUE) 
 meanTemp2</code></pre>
 <pre><code>## [1] 77.88235</code></pre>
@@ -394,8 +397,11 @@ minTemp2</code></pre>
 <pre class="r"><code>maxTemp2 &lt;- max(data$Temp, na.rm=TRUE)
 maxTemp2</code></pre>
 <pre><code>## [1] 97</code></pre>
-<pre class="r"><code># Ozone
-# find mean, sd, min and Max of the ozone column
+</div>
+</div>
+<div id="ozone" class="section level4">
+<h4>Ozone</h4>
+<pre class="r"><code># find mean, sd, min and Max of the ozone column
 meanOzone &lt;- mean(clean_data$Ozone)
 meanOzone</code></pre>
 <pre><code>## [1] 42.0991</code></pre>
@@ -409,6 +415,7 @@ minOzone</code></pre>
 maxOzone</code></pre>
 <pre><code>## [1] 168</code></pre>
 <pre class="r"><code># all na values are in ozone, so redoing it with na.rm will make no difference</code></pre>
+</div>
 </div>
 <div id="question-3" class="section level3">
 <h3>Question 3</h3>
@@ -432,6 +439,7 @@ beta_hat</code></pre>
 ## Coefficients:
 ## (Intercept)           X1           X2  
 ##     -17.579           NA        3.932</code></pre>
+<pre class="r"><code># get the same value = question 3 calc was correct</code></pre>
 </div>
 </div>
 

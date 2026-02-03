@@ -18,12 +18,15 @@ library(tidyr)
 ### Question 1
 ```{r}
 data <- airquality
+sum(is.na(data)) # count how many na rows
+colSums(is.na(data)) # find out which cols have na
 clean_data <- data %>% drop_na() # remove na rows
 ```
 
 ### Question 2
+#### Temperature
 ```{r}
-# Temperature
+
 # find mean, sd, min and Max of the temperature column
 meanTemp <- mean(clean_data$Temp) 
 meanTemp
@@ -33,8 +36,10 @@ minTemp <- min(clean_data$Temp)
 minTemp
 maxTemp <- max(clean_data$Temp)
 maxTemp
-
-# now just removing na from calc
+```
+##### Question 2 Temp Calcs using Na.rm = True
+```{r}
+# removing all of the na rows lead to losing Temp values, redoing it to make it more accurate. Keeping the old code for learning purposes.
 meanTemp2 <- mean(data$Temp, na.rm=TRUE) 
 meanTemp2
 sdTemp2<- sd(data$Temp, na.rm=TRUE)
@@ -43,9 +48,10 @@ minTemp2 <- min(data$Temp, na.rm=TRUE)
 minTemp2
 maxTemp2 <- max(data$Temp, na.rm=TRUE)
 maxTemp2
+```
 
-
-# Ozone
+#### Ozone
+```{r}
 # find mean, sd, min and Max of the ozone column
 meanOzone <- mean(clean_data$Ozone)
 meanOzone
@@ -61,7 +67,8 @@ maxOzone
 
 ### Question 3
 ```{r}
-data2<- cars #load cars data set
+data2<- cars # load cars data set
+sum(is.na(data2)) # no na rows
 Y <- data2$dist
 X <- cbind(1, data2$speed)
 beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y # beta estimate
@@ -73,6 +80,7 @@ beta_hat
 ```{r}
 lm(Y~X) #check against lm function
 
+# get the same value = question 3 calc was correct
 ```
 
 
