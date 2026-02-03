@@ -20,6 +20,25 @@ library(tidyr)
 data <- airquality
 sum(is.na(data)) # count how many na rows
 colSums(is.na(data)) # find out which cols have na
+
+# Find na rows in ozone
+naOzone <- c()
+for (i in seq_along(data$Ozone)) {
+  if (is.na(data$Ozone[i])) {
+    naOzone <- c(naOzone, i)
+  }
+}
+print(naOzone)
+
+# Find na rows in Solar.R
+naSolar <- c()
+for (i in seq_along(data$Solar.R)) {
+  if (is.na(data$Solar.R[i])) {
+    naSolar <- c(naSolar, i)
+  }
+}
+print(naSolar)
+
 clean_data <- data %>% drop_na() # remove na rows
 ```
 

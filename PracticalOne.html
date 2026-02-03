@@ -368,6 +368,25 @@ sum(is.na(data)) # count how many na rows</code></pre>
 <pre class="r"><code>colSums(is.na(data)) # find out which cols have na</code></pre>
 <pre><code>##   Ozone Solar.R    Wind    Temp   Month     Day 
 ##      37       7       0       0       0       0</code></pre>
+<pre class="r"><code># Find na rows in ozone
+naOzone &lt;- c()
+for (i in seq_along(data$Ozone)) {
+  if (is.na(data$Ozone[i])) {
+    naOzone &lt;- c(naOzone, i)
+  }
+}
+print(naOzone)</code></pre>
+<pre><code>##  [1]   5  10  25  26  27  32  33  34  35  36  37  39  42  43  45  46  52  53  54
+## [20]  55  56  57  58  59  60  61  65  72  75  83  84 102 103 107 115 119 150</code></pre>
+<pre class="r"><code># Find na rows in Solar.R
+naSolar &lt;- c()
+for (i in seq_along(data$Solar.R)) {
+  if (is.na(data$Solar.R[i])) {
+    naSolar &lt;- c(naSolar, i)
+  }
+}
+print(naSolar)</code></pre>
+<pre><code>## [1]  5  6 11 27 96 97 98</code></pre>
 <pre class="r"><code>clean_data &lt;- data %&gt;% drop_na() # remove na rows</code></pre>
 </div>
 <div id="question-2" class="section level3">
