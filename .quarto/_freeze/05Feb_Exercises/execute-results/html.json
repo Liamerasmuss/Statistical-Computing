@@ -1,0 +1,17 @@
+{
+  "hash": "3d0724e317637ae811503b0654976489",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Statistical Computing- Exercie05Feb\"\nformat: html\neditor: visual\n---\n\n# Question 4 - Create Sin Graph\n\n\n::: {.cell}\n\n```{.r .cell-code}\ncurve(sin(x), from = -2, to = 2, col = \"blue\", xlab = \"x\", ylab = \"sin(x)\", main = \"Sin Graph\")\n```\n\n::: {.cell-output-display}\n![](05Feb_Exercises_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# create sin graph ranging from -2 to 2      \n```\n:::\n\n\n# Question 5\n\n\n::: {.cell}\n\n```{.r .cell-code}\nvals <- rt(1000, 1) # 1000 t distribution vals with 1df\nnorms<- sort(rnorm(500000, 0, 1)) # 500 000 norm dist values\n\nindices <- ceiling(seq(from = 1,\n               to = 500000,\n               length.out = 1000))\n# Create 1000 equally spaced points from 1 to 500000\n# and apply ceiling() to ensure all values are valid integer indices\n\n\nreduced_norms <- norms[indices]\n# Subset the sorted normal sample using the generated indices\n# to obtain 1000 evenly spaced reference values\nsorted_vals <- sort(vals)\n# Sort the simulated values in ascending order\n# to align them with the theoretical reference values\n\nsim_matrix <-  replicate(1000, sort(rnorm(1000, 0, 1))) # 1000 ind. samples of size 1000 from std normal dist. Sorted and then stored\n\nlower_env <- apply(sim_matrix, 1, quantile, probs = 0.025) # calc the 2.5th percentile across the simulated samples to make the lower \"envelope\"\nupper_env <- apply(sim_matrix, 1, quantile, probs = 0.975) # calc the 97.5th percentile across the simulated samples to make the lower \"envelope\"\n\ntheoretical_q <- rowMeans(sim_matrix) # estimate the theoretical quantiles \n\n# plot it all\nplot(reduced_norms,\n     sorted_vals, ylim = c(-4, 4), ylab = \"vals\", xlab=\"norm quantiles\")\nabline(0,1)\nlines(theoretical_q, lower_env, col = \"red\", lwd = 2)\nlines(theoretical_q, upper_env, col = \"green\", lwd = 1)\n```\n\n::: {.cell-output-display}\n![](05Feb_Exercises_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n\n```{.r .cell-code}\n# check\nlibrary(car)\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nLoading required package: carData\n```\n\n\n:::\n\n```{.r .cell-code}\nqqPlot(vals, envelope = 0.95, ylim = c(-5, 5))\n```\n\n::: {.cell-output-display}\n![](05Feb_Exercises_files/figure-html/unnamed-chunk-2-2.png){width=672}\n:::\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] 391 832\n```\n\n\n:::\n\n```{.r .cell-code}\n# plot looks correct\n```\n:::\n\n",
+    "supporting": [
+      "05Feb_Exercises_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
