@@ -1,0 +1,102 @@
+---
+title: "Statistical Computing - Practical1 (03Feb)"
+format: html
+editor: visual
+---
+
+## Question 1
+
+Find all rows in “airquality” that have missing values. Note that the `airquality` dataset in `R` is always available (just type `airquality` in the console to see it).
+
+```{r}
+library(tidyr)
+data <- airquality
+sum(is.na(data)) # count how many na rows
+colSums(is.na(data)) # find out which cols have na
+
+# Find na rows in ozone
+naOzone <- c()
+for (i in seq_along(data$Ozone)) {
+  if (is.na(data$Ozone[i])) {
+    naOzone <- c(naOzone, i)
+  }
+}
+print(naOzone)
+
+# Find na rows in Solar.R
+naSolar <- c()
+for (i in seq_along(data$Solar.R)) {
+  if (is.na(data$Solar.R[i])) {
+    naSolar <- c(naSolar, i)
+  }
+}
+print(naSolar)
+
+clean_data <- data %>% drop_na() # remove na rows
+```
+
+### Question 2
+
+#### Temperature
+
+```{r}
+# find mean, sd, min and Max of the temperature column
+meanTemp <- mean(clean_data$Temp) 
+meanTemp
+sdTemp<- sd(clean_data$Temp)
+sdTemp
+minTemp <- min(clean_data$Temp)
+minTemp
+maxTemp <- max(clean_data$Temp)
+maxTemp
+```
+
+##### Question 2 Temp Calcs using Na.rm = True
+
+```{r}
+# removing all of the na rows lead to losing Temp values, redoing it to make it more accurate. Keeping the old code for learning purposes.
+meanTemp2 <- mean(data$Temp, na.rm=TRUE) 
+meanTemp2
+sdTemp2<- sd(data$Temp, na.rm=TRUE)
+sdTemp2
+minTemp2 <- min(data$Temp, na.rm=TRUE)
+minTemp2
+maxTemp2 <- max(data$Temp, na.rm=TRUE)
+maxTemp2
+```
+
+#### Ozone
+
+```{r}
+# find mean, sd, min and Max of the ozone column
+meanOzone <- mean(clean_data$Ozone)
+meanOzone
+sdOzone <- sd(clean_data$Ozone)
+sdOzone
+minOzone <- min(clean_data$Ozone)
+minOzone
+maxOzone <- max(clean_data$Ozone)
+maxOzone
+
+# all na values are in ozone, so redoing it with na.rm will make no difference
+```
+
+### Question 3
+
+```{r}
+data2<- cars # load cars data set
+sum(is.na(data2)) # no na rows
+Y <- data2$dist
+X <- cbind(1, data2$speed)
+beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y # beta estimate
+rownames(beta_hat) <- c("Intercept", "Speed")
+beta_hat
+```
+
+### Question 4
+
+```{r}
+lm(Y~X) #check against lm function
+
+# get the same value = question 3 calc was correct
+```

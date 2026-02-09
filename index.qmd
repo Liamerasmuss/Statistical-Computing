@@ -1,0 +1,7 @@
+---
+title: "SC_Assignment1"
+---
+
+Statistical Computing Assignment 1
+
+ERSLIA004

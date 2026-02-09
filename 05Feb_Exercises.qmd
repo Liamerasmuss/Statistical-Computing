@@ -1,0 +1,54 @@
+---
+title: "Statistical Computing- Exercie05Feb"
+format: html
+editor: visual
+---
+
+# Question 4 - Create Sin Graph
+
+```{r}
+curve(sin(x), from = -2, to = 2, col = "blue", xlab = "x", ylab = "sin(x)", main = "Sin Graph")
+# create sin graph ranging from -2 to 2      
+```
+
+# Question 5
+
+```{r}
+vals <- rt(1000, 1) # 1000 t distribution vals with 1df
+norms<- sort(rnorm(500000, 0, 1)) # 500 000 norm dist values
+
+indices <- ceiling(seq(from = 1,
+               to = 500000,
+               length.out = 1000))
+# Create 1000 equally spaced points from 1 to 500000
+# and apply ceiling() to ensure all values are valid integer indices
+
+
+reduced_norms <- norms[indices]
+# Subset the sorted normal sample using the generated indices
+# to obtain 1000 evenly spaced reference values
+sorted_vals <- sort(vals)
+# Sort the simulated values in ascending order
+# to align them with the theoretical reference values
+
+sim_matrix <-  replicate(1000, sort(rnorm(1000, 0, 1))) # 1000 ind. samples of size 1000 from std normal dist. Sorted and then stored
+
+lower_env <- apply(sim_matrix, 1, quantile, probs = 0.025) # calc the 2.5th percentile across the simulated samples to make the lower "envelope"
+upper_env <- apply(sim_matrix, 1, quantile, probs = 0.975) # calc the 97.5th percentile across the simulated samples to make the lower "envelope"
+
+theoretical_q <- rowMeans(sim_matrix) # estimate the theoretical quantiles 
+
+# plot it all
+plot(reduced_norms,
+     sorted_vals, ylim = c(-4, 4), ylab = "vals", xlab="norm quantiles")
+abline(0,1)
+lines(theoretical_q, lower_env, col = "red", lwd = 2)
+lines(theoretical_q, upper_env, col = "green", lwd = 1)
+
+# check
+library(car)
+qqPlot(vals, envelope = 0.95, ylim = c(-5, 5))
+
+# plot looks correct
+
+```
